@@ -4,14 +4,18 @@ const Context = React.createContext();
 
 const reducer = (state, action) => {
     switch (action.type) {
-        case 'DELETE_CONTACT':
+        case "DELETE_CONTACT":
             return {
                 ...state,
                 contacts: state.contacts.filter(
                     contact => contact.id !== action.payload
                 )
             };
-       
+        case "ADD_CONTACT":
+            return {
+                ...state,
+                contacts: [action.payload, ...state.contacts]
+            };
         default:
             return state;
     }
@@ -28,7 +32,7 @@ export class Provider extends Component {
             },
             {
                 id: 2,
-                name: "John Doe 1",
+                name: "John Doe 2",
                 email: "jDoe@gmail.com",
                 phone: "555-555-5554"
             },

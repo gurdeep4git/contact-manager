@@ -1,20 +1,33 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import Header from "./components/Header";
-import Contacts from "./components/Contacts";
+import Header from "./components/layout/Header";
+import Contacts from "./components/contact/Contacts";
+import AddContact from "./components/contact/AddContact";
+import About from "./components/pages/About";
 
 import { Provider } from "./context";
 
 function App() {
     return (
         <Provider>
-            <div className="App">
-                <Header branding="Contact Manager" />
-                <div className="container">
-                    <Contacts />
+            <Router>
+                <div className="App">
+                    <Header branding="Contact Manager" />
+                    <div className="container">
+                        <Switch>
+                            <Route exact path="/" component={Contacts} />
+                            <Route
+                                exact
+                                path="/contact/add"
+                                component={AddContact}
+                            />
+                            <Route exact path="/about" component={About} />
+                        </Switch>
+                    </div>
                 </div>
-            </div>
+            </Router>
         </Provider>
     );
 }
